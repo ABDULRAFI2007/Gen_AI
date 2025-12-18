@@ -1,0 +1,19 @@
+pip install langchain_google_genai
+#creating our own chatbot with help of Api to handle your respoase
+import langchain_google_genai #API call google AI
+import os #handleling any file
+from langchain_google_genai import ChatGoogleGenerativeAI #chatgooglegenerativeAI
+import getpass # Import getpass for secure password input
+#setup_API_KEY
+if not os.environ.get("GOOGLE_API_KEY"):
+    os.environ["GOOGLE_API_KEY"] = getpass.getpass("enter API key") #past api Create Env os
+
+model=ChatGoogleGenerativeAI(model="gemini-2.5-flash")# model gemini version 2.5 flash
+
+while True:
+  user_input=input("you: ")#setup
+  if user_input.lower() in["exit","quit"]:
+    print("Goodbye")
+    break
+  response=model.invoke(user_input) #model api
+  print(f"model:",response.content)#api key
